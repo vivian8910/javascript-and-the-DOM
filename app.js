@@ -32,32 +32,27 @@ for (let i = 0; i < lis.length; i += 1) {
 function initializer(ul) {
     let firstItem = ul.firstElementChild;
     let lastItem = ul.lastElementChild;
-    let upButton = firstItem.querySelector('.up');
-    let downButton = lastItem.querySelector('.down');
-    upButton.style.backgroundColor = 'grey';
-    upButton.disabled = true;
-    downButton.style.backgroundColor = 'grey';
-    downButton.disabled = true;
     lis = ul.children
-    if (lis.length > 2) {
-        for (let i = 1; i < lis.length -1; i += 1) {
-            let upBut = lis[i].querySelector('.up');
-            let downBut = lis[i].querySelector('.down');
-            upBut.style.backgroundColor = '#52bab3';
-            upBut.disabled = false;
-            downBut.style.backgroundColor = '#508abc';
-            downBut.disabled = false;
-        } 
-    } 
-    if (lis.length == 2) {
-        let downBut = lis[0].querySelector('.down');
-        let upBut = lis[1].querySelector('.up');
-        upBut.style.backgroundColor = '#52bab3';
-        upBut.disabled = false;
-        downBut.style.backgroundColor = '#508abc';
-        downBut.disabled = false;
+    for (let i = 0; i < lis.length; i += 1) {
+        if (lis[i] == firstItem) {
+           let upButton = firstItem.querySelector('.up');
+           upButton.style.backgroundColor = 'grey';
+           upButton.disabled = true;
+        } else {
+           let upButton = lis[i].querySelector('.up');
+           upButton.style.backgroundColor = '#52bab3';
+           upButton.disabled = false;
+          }
+        if (lis[i] == lastItem) {
+           let downButton = lastItem.querySelector('.down');
+           downButton.style.backgroundColor = 'grey';
+           downButton.disabled = true;
+        } else {
+           let downButton = lis[i].querySelector('.down');
+           downButton.style.backgroundColor = '#508abc';
+           downButton.disabled = false; 
+          }
     }
-
 }
 
 initializer(listUl);
@@ -77,7 +72,7 @@ listUl.addEventListener('click', (event) => {
       if (prevLi) {
             ul.insertBefore(li, prevLi);
             initializer(ul);
-       }
+      }
     }  
     if (event.target.className == 'down') {
       let li = event.target.parentNode;
@@ -86,7 +81,7 @@ listUl.addEventListener('click', (event) => {
       if (nextLi) {
             ul.insertBefore(nextLi, li); 
             initializer(ul);
-       }
+      }
     }
   }
 });
@@ -115,6 +110,7 @@ addItemButton.addEventListener('click', () => {
   initializer(ul);
   addItemInput.value = '';
 });
+
 
 
 
